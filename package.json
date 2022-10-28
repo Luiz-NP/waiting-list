@@ -1,0 +1,17 @@
+{
+  "name": "waiting-list",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Luiz-NP",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn tsc && node build/menu.js"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/readline-sync": "^1.4.4"
+  }
+}
