@@ -1,22 +1,16 @@
 import readline from "readline-sync";
 import { registration } from "./registration";
-import { push } from "./push";
-import { list, seeList } from "./list";
-import { waiting } from "./waiting";
+import { regular, preferential } from "./list";
+import { exam } from "./exam";
 
-export const options: string[] = ["simple exams", "tomography", "X-ray"];
+export let pacient: object;
 
-let pacient: object;
-
-let option: number | undefined;
-
-do {
+export const menu = (): any => {
     console.clear();
-    if (list.length >= 20) {
+    if ((regular.length + preferential.length) >= 2) {
         console.log("sorry, we have no more vacancies today :(\n");
         readline.keyInPause();
-        option = -1;
-        continue;
+        process.exit();
     }
 
     console.log("Hi, Welcome\n");
@@ -29,29 +23,9 @@ do {
     
     pacient = registration();
 
-    option = readline.keyInSelect(options, "which exam do you want to take?");
+    exam();
 
-    switch(option) {
-        case 0: {
-            push(pacient, option);
-        }
-        break;
-        case 1: {
-            push(pacient, option);
-        }
-        break;
-        case 2: {
-            push(pacient, option);
-        }
-        break;
-        case 3: {
-            seeList();
-            readline.keyInPause();
-        }
-        break;
-    }
+    return menu();
+}
 
-    console.clear();
-    option = waiting();
-
-} while(option !== -1);
+menu();
