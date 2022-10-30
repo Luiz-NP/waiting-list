@@ -1,8 +1,9 @@
 import readline from "readline-sync";
 import { seeList } from "./list";
+import { menu } from "./menu";
 
 const waitingOptions: string[] = ["new patient", "see waiting list", "get a coffee :)"];
-let option: number | string | boolean;
+let option: number | boolean;
 
 export const waiting = () => {
     console.clear();
@@ -10,10 +11,9 @@ export const waiting = () => {
     option = readline.keyInSelect(waitingOptions, "feel free :D");
 
     switch(option) {
-        case 0: return 0;
         case 1: {
             console.clear();
-            console.log(seeList());
+            seeList();
             readline.keyInPause();
             waiting();
         }
@@ -27,16 +27,12 @@ export const waiting = () => {
         break;
         case -1: {
             console.clear();
-            option = readline.keyInYN("do you really want to leave?\n");
-            
+            option = readline.keyInYNStrict("do you really want to leave?\n");
+
             if (option === false) waiting();
-            if (option !== true) {
-                console.log("I think that was a no ;D\n");
-                readline.keyInPause();
-                waiting();
-            }
-            
-            return -1;
+            process.exit();
         }
     }
+
+    return menu();
 }
